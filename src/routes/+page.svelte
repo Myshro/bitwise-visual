@@ -263,16 +263,18 @@ const clearEverything = () => {
 <div id="container">
     <header>
         <h1>ByteSmith</h1>
-        <!-- <a href="/">home</a> -->
         <dialog id="show-manual">
             <form method="dialog">
                 <h1>Welcome to ByteSmith!</h1>
-                <p>This website provides an efficient way to visualize a sequence of bitwise operations. Decimal, Binary and Hexadecimal inputs are supported. 
-                    Binary, and hexadecimal inputs can be accessed with the 0x and 0b prefix respectively. Supported operators and their precedence can be viewed 
-                    in the table below. 
+                <p>This website provides an efficient way to visualize a sequence of bitwise operations. Decimal, binary, and hexadecimal inputs are supported. 
+                    Binary and hexadecimal inputs can be accessed with the 0x and 0b prefix respectively. Decimal inputs require no prefix. 
+                    Supported operators and their precedence can be viewed in the table below. 
                 </p>
-                <button>X</button>
                 <img id="chart" src={Chart} alt="">
+                <p>This website was created as part of the Hack the Map hackathon hosted by UVA. More information can be found by clicking the devpost link in the header.
+                    
+                </p>
+                <button>Close</button>
             </form>
           </dialog>          
         <p id="manual" on:click={() => {
@@ -380,7 +382,12 @@ const clearEverything = () => {
 
     #manual {
         cursor: pointer;
+        font-size: 1rem;
     }
+
+    #manual:hover {
+        text-decoration: underline;
+    }   
 
     button:hover {
         background-color: var(--dark);
@@ -397,6 +404,13 @@ const clearEverything = () => {
         width: 100vw;
     }
 
+    form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
     .over-related {
         display: flex;
         justify-content: left;
@@ -411,7 +425,7 @@ const clearEverything = () => {
     }
 
     .error {
-        color: red;
+        color: rgb(255, 0, 0);
     }
 
     img {
@@ -423,10 +437,14 @@ const clearEverything = () => {
     #chart {
         width: 25%;
         height: auto;
-        padding: 3rem;
+        padding: 1rem;
     }
 
-    #modal p {
+    form p {
         width: 50%;
+        text-align: center;
+    }
+    form button {
+        margin-top: 1rem;
     }
 </style>

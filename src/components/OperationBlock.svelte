@@ -41,12 +41,12 @@
         <div id="operator">{operator.charAt(0)}</div> 
         <div id="inputs">
             {#if decimalA !== null}
-                <div>0b{a} ╎ 0x{parseInt(a, 2).toString(16).padStart(8, "0")} ╎ {decimalA ?? ""}</div>
+                <div>0b{a} ╎ 0x{parseInt(a, 2).toString(16).padStart(8, "0").toUpperCase()} ╎ {decimalA ?? ""}</div>
             {/if}
-            <div>0b{b} ╎ 0x{parseInt(b, 2).toString(16).padStart(8, "0")} ╎ {decimalB}</div>
+            <div>0b{b} ╎ 0x{parseInt(b, 2).toString(16).padStart(8, "0").toUpperCase()} ╎ {decimalB}</div>
         </div>
     </div>
-    <div id="output"> <span id="operator">=</span>0b{result} ╎ 0x{parseInt(result, 2).toString(16).padStart(8, "0")} ╎ {decimalResult}</div>    
+    <div id="output"> <span id="operator">=</span>0b{result} ╎ 0x{parseInt(result, 2).toString(16).padStart(8, "0").toUpperCase()} ╎ {decimalResult}</div>    
 </div>
 
 
