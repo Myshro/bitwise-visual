@@ -21,7 +21,7 @@
     
     function infixToPostfix(str)
 {
-    let p = /[\b[0][xXbB][0-9a-fA-F]+\b|[0-9]+|~|!|\+|&|\||\^|<<|>>|\(|\)/g;
+    let p = /[\b[0][bB][01]+\b|\b[0][xX][0-9a-fA-F]+\b|[\-0-9]+|~|!|\+|&|\||\^|<<|>>|\(|\)/g;
     let arr = str.match(p);
     
         let test = str.replace(p, '').replaceAll(' ','');
@@ -268,12 +268,12 @@ const clearEverything = () => {
                 <img id="chart" src={Chart} alt="">
             </form>
           </dialog>          
-        <p on:click={() => {
+        <p id="manual" on:click={() => {
             const manual = document.getElementById('show-manual');
             manual.showModal();
         }}>manual</p>
         <a href="https://github.com/Myshro/bitwise-visual" target="_blank">github</a>
-        <a href="https://pokeapi.co/" target="_blank">devpost</a>
+        <a href="https://devpost.com/software/bytesmith" target="_blank">devpost</a>
     </header>  
     <main>  
 
@@ -369,6 +369,10 @@ const clearEverything = () => {
         text-decoration: none;
         background-color: white;
         padding: 0 1rem 0 1rem;
+    }
+
+    #manual {
+        cursor: pointer;
     }
 
     button:hover {
