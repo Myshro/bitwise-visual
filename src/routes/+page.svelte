@@ -19,7 +19,7 @@
 
     let isLoaded = false;
     
-    function infixToPostfix(str)
+function infixToPostfix(str)
 {
     let p = /[\b[0][bB][01]+\b|\b[0][xX][0-9a-fA-F]+\b|[\-0-9]+|~|!|\+|&|\||\^|<<|>>|\(|\)/g;
     let arr = str.match(p);
@@ -50,6 +50,13 @@
                     throwError("Invalid Operator Order Detected");
                     return;
                 }
+            }
+        }
+        else if(!/\(|\)/.test(arr[t])){
+            if(t - 1> 0 && (!isOperator(arr[t - 1]) && arr[t - 1] != '(') || t + 1 < arr.length && (!isOperator(arr[t + 1]) && arr[t + 1] != ')'))
+            {
+                throwError("Invalid Operand Order Detected");
+                return;
             }
         }
     }

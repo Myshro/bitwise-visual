@@ -8,31 +8,31 @@
     export let result;
     export let currentStep;
 
-    const evaluate = () => {
-        switch(operator) {
-            case "+":
-                return a + b;
-            case "-":
-                return a - b;
-            case "*":
-                return a * b;
-            case "/":
-                return a / b;
-            case "^":
-                return a ** b;
-            default:
-                return "Invalid operator";
-        }
-    }
+    // const evaluate = () => {
+    //     switch(operator) {
+    //         case "+":
+    //             return a + b;
+    //         case "-":
+    //             return a - b;
+    //         case "*":
+    //             return a * b;
+    //         case "/":
+    //             return a / b;
+    //         case "^":
+    //             return a ** b;
+    //         default:
+    //             return "Invalid operator";
+    //     }
+    // }
 
-     const toPlainString = (num) => {
-        return (''+ +num).replace(/(-?)(\d*)\.?(\d*)e([+-]\d+)/,
-        function(a,b,c,d,e) {
-        return e < 0
-            ? b + '0.' + Array(1-e-c.length).join(0) + c + d
-            : b + c + d + Array(e-d.length+1).join(0);
-    });
-}
+    //  const toPlainString = (num) => {
+    //     return (''+ +num).replace(/(-?)(\d*)\.?(\d*)e([+-]\d+)/,
+    //     function(a,b,c,d,e) {
+    //     return e < 0
+    //         ? b + '0.' + Array(1-e-c.length).join(0) + c + d
+    //         : b + c + d + Array(e-d.length+1).join(0);
+    // });
+//   }
 </script>
 
 <span id="step">Step {currentStep + 1}) {decimalA ?? ""}{operator}{decimalB}</span>
@@ -52,7 +52,7 @@
 
 <style>
     #container {
-        border: 1px solid black ;
+        /* border: 2px solid black ; */
         width: 75%;
         margin-bottom: 1rem;
         animation: fade-in 0.25s;
