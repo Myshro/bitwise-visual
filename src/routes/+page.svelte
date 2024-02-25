@@ -38,14 +38,14 @@
         {
             if(/~|\!/.test(arr[t]))
             {
-                if(t + 1 >= arr.length || isOperator(arr[t + 1]))
+                if(t + 1 >= arr.length || isOperator(arr[t + 1]) || (t - 1 >= 0 && !isOperator(arr[t - 1]) && arr[t - 1] != '('))
                 {
                     throwError("Invalid Operator Order Detected");
                     return;
                 }
             }
             else{
-                if(t - 1 < 0 || isOperator(arr[t-1]) || t+1 >= arr.length || isOperator(arr[t+1]))
+                if(t - 1 < 0 || isOperator(arr[t-1])|| t+1 >= arr.length || (isOperator(arr[t+1]) && /~|\!/.test(arr[t - 1])))
                 {
                     throwError("Invalid Operator Order Detected");
                     return;
@@ -170,7 +170,10 @@ const evaluatePostfix = (postfixExpression) => {
             stack.push(parseFloat(token));
         } else {
             let operand2 = stack.pop();
-            let operand1 = stack.pop();
+            let operand1 = null;
+            if (token !== '~' && token !== '!') {
+                operand1 = stack.pop();
+            }
             let result;
 
             switch (token) {
@@ -290,6 +293,7 @@ const clearEverything = () => {
                 decimalOutcomes = evaluatePostfix(postfix);
                 binaryOutcomes = convertToBinary(decimalOutcomes);
                 isOver = false;
+                console.log(blocks)
             }
             isLoaded = true;
             if (currentStep < binaryOutcomes.length) {
