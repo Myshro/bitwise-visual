@@ -6,7 +6,7 @@
     
 
     let equation = "";
-    let blocks = [];
+    let binaryBlocks = [];
     let decimalBlocks = [];
 
     let postfix;
@@ -248,7 +248,7 @@ const convertToBinary = (outcomes) => {
 // console.log(convertToBinary(result));
 
 const clearEverything = () => {
-    blocks=[]; 
+    binaryBlocks=[]; 
     decimalBlocks = [];
     currentStep = 0; 
     isOver = false;
@@ -267,11 +267,20 @@ const clearEverything = () => {
             <form method="dialog">
                 <h1>Welcome to ByteSmith!</h1>
                 <p>This website provides an efficient way to visualize a sequence of bitwise operations. Decimal, binary, and hexadecimal inputs are supported. 
-                    Binary and hexadecimal inputs can be accessed with the 0x and 0b prefix respectively. Decimal inputs require no prefix. 
+                    Binary and hexadecimal inputs can be accessed with the <span class="bolded">0x</span> and <span class="bolded">0b</span> prefix respectively. Decimal inputs require no prefix. 
                     Supported operators and their precedence can be viewed in the table below. 
                 </p>
                 <img id="chart" src={Chart} alt="">
-                <p>This website was created as part of the Hack the Map hackathon hosted by UVA. More information can be found by clicking the devpost link in the header.
+                <p><span class="bolded">Example: ((0x80 >> 3) & (0x3F ^ 0x15)) | (~(0x4F) & (0x2A &lt&lt 2))</span></p>
+                <h1>Buttons:</h1>
+                <ul>
+                    <li><span class="bolded">Load/Step: </span>Clicking load runs the first step. Step goes through the equation until termination.</li>
+                    <li><span class="bolded">Restart: </span>Erases everything except the current input. Requires reloading the equation.</li>
+                    <li><span class="bolded">Clear: </span>Erases everything including the current input.</li>
+                </ul>
+                <p><span class="tiny">
+                    This website was created as part of the Hack the Map hackathon hosted by UVA. More information can be found by clicking the devpost link in the header.
+                </span>
                     
                 </p>
                 <button>Close</button>
@@ -296,19 +305,19 @@ const clearEverything = () => {
             isOver = false;
             }}
         >Load</button> -->
-        <button on:click={() => {
+        <button class={isOver ? "finished-loading" : ""} on:click={() => {
             if (!isLoaded) {
                 postfix = infixToPostfix(equation); 
                 decimalOutcomes = evaluatePostfix(postfix);
                 binaryOutcomes = convertToBinary(decimalOutcomes);
                 isOver = false;
-                console.log(blocks)
+                console.log(binaryBlocks)
             }
             isLoaded = true;
             if (currentStep < binaryOutcomes.length) {
                 decimalBlocks.push(decimalOutcomes[currentStep]); 
-                blocks.push(binaryOutcomes[currentStep++]);
-                blocks = blocks.slice();
+                binaryBlocks.push(binaryOutcomes[currentStep++]);
+                binaryBlocks = binaryBlocks.slice();
                 decimalBlocks = decimalBlocks.slice();
             } else {
                 isOver = true;
@@ -322,7 +331,7 @@ const clearEverything = () => {
         <span id="done" class="error">{errorMessage}</span> 
     {/if}  
 
-    {#each blocks as block, index}
+    {#each binaryBlocks as block, index}
         <OperationBlock a={block.operand1} b={block.operand2} 
         decimalA={decimalBlocks[index].operand1} decimalB={decimalBlocks[index].operand2} decimalResult={decimalBlocks[index].result}
         currentStep={index}
@@ -380,6 +389,14 @@ const clearEverything = () => {
         padding: 0 1rem 0 1rem;
     }
 
+    .finished-loading {
+        background-color: red;
+    }
+
+    .finished-loading:hover {
+        background-color: red;
+    }
+
     #manual {
         cursor: pointer;
         font-size: 1rem;
@@ -424,6 +441,10 @@ const clearEverything = () => {
         display: inline;
     }
 
+    .bolded {
+        font-weight: 700;
+    }
+
     .error {
         color: rgb(255, 0, 0);
     }
@@ -443,7 +464,18 @@ const clearEverything = () => {
     form p {
         width: 50%;
         text-align: center;
+        margin: 0.5rem 0 0.5rem 0;
     }
+
+    /* li {
+        text-align: center;
+    } */
+
+    .tiny {
+        font-size: 1rem;
+        color: rgb(136, 137, 145);
+    }
+
     form button {
         margin-top: 1rem;
     }
